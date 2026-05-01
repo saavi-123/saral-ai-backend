@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "chat_threads",
+  "info": {
+    "singularName": "chat-thread",
+    "pluralName": "chat-threads",
+    "displayName": "ChatThread"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "project": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "chat_threads"
+    },
+    "messages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::message.message",
+      "mappedBy": "chat_thread"
+    },
+    "branched_from": {
+      "type": "string"
+    },
+    "branch_point": {
+      "type": "string"
+    }
+  }
+}

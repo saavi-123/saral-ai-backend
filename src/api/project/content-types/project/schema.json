@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "projects",
+  "info": {
+    "singularName": "project",
+    "pluralName": "projects",
+    "displayName": "Project"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "status1": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "closed",
+        "pending"
+      ]
+    },
+    "characters": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::character.character",
+      "mappedBy": "project"
+    },
+    "queries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::query.query",
+      "mappedBy": "project"
+    },
+    "context_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::context-item.context-item",
+      "mappedBy": "project"
+    },
+    "chat_threads": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::chat-thread.chat-thread",
+      "mappedBy": "project"
+    },
+    "project_id": {
+      "type": "string"
+    }
+  }
+}

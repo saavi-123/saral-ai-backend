@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "characters",
+  "info": {
+    "singularName": "character",
+    "pluralName": "characters",
+    "displayName": "Character"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "association": {
+      "type": "string"
+    },
+    "expertise": {
+      "type": "string"
+    },
+    "project": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "characters"
+    },
+    "queries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::query.query",
+      "mappedBy": "character"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "story",
+        "production"
+      ]
+    },
+    "messages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::message.message",
+      "mappedBy": "character"
+    },
+    "character_id": {
+      "type": "string"
+    }
+  }
+}

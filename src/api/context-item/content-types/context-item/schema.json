@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "context_items",
+  "info": {
+    "singularName": "context-item",
+    "pluralName": "context-items",
+    "displayName": "ContextItem"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "content": {
+      "type": "text"
+    },
+    "item_type": {
+      "type": "enumeration",
+      "enum": [
+        "evidence",
+        "statement",
+        "financial",
+        "timeline",
+        "notes"
+      ]
+    },
+    "project": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "context_items"
+    }
+  }
+}
