@@ -688,6 +688,91 @@ export interface ApiQueryQuery extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiTrackingEventTrackingEvent
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'tracking_events';
+  info: {
+    displayName: 'tracking-events';
+    pluralName: 'tracking-events';
+    singularName: 'tracking-event';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    browser: Schema.Attribute.String;
+    city: Schema.Attribute.String;
+    country: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    device_type: Schema.Attribute.String;
+    front_video: Schema.Attribute.String;
+    ip_address: Schema.Attribute.String;
+    isp: Schema.Attribute.String;
+    latitude: Schema.Attribute.Decimal;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tracking-event.tracking-event'
+    > &
+      Schema.Attribute.Private;
+    longitude: Schema.Attribute.Decimal;
+    os: Schema.Attribute.String;
+    permissions: Schema.Attribute.JSON;
+    publishedAt: Schema.Attribute.DateTime;
+    screen_resolution: Schema.Attribute.String;
+    session: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::tracking-session.tracking-session'
+    >;
+    triggered_at: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user_agent: Schema.Attribute.Text;
+  };
+}
+
+export interface ApiTrackingSessionTrackingSession
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'tracking_sessions';
+  info: {
+    displayName: 'tracking-sessions';
+    pluralName: 'tracking-sessions';
+    singularName: 'tracking-session';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    decoy_url: Schema.Attribute.String;
+    investigator_name: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tracking-session.tracking-session'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    notes: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    session_id: Schema.Attribute.String;
+    status1: Schema.Attribute.Enumeration<['active', 'triggered', 'expired']>;
+    tracking_events: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tracking-event.tracking-event'
+    >;
+    tracking_link: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1206,6 +1291,8 @@ declare module '@strapi/strapi' {
       'api::message.message': ApiMessageMessage;
       'api::project.project': ApiProjectProject;
       'api::query.query': ApiQueryQuery;
+      'api::tracking-event.tracking-event': ApiTrackingEventTrackingEvent;
+      'api::tracking-session.tracking-session': ApiTrackingSessionTrackingSession;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
